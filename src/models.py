@@ -15,7 +15,9 @@ class User(Base):
     first_name=Column(String(250), nullable=False)
     last_name=Column(String(250), nullable=False)
     email=Column(String(250), nullable=False)
-
+    relation_follower = relationship("Follower",backref="user")
+    relation_comment= relationship("Comment",backref="user")
+    relation_Post= relationship("post",backref="user")
 
 class Follower(Base):
     __tablename__ = 'follower'
@@ -34,9 +36,11 @@ class Post (Base):
     __tablename__ = 'post'
     id = Column(Integer, primary_key=True)
     user_id = Column(String(250),nullable=False)
+    relation_media= relationship("Media",backref="post")
+    relation_comment= relationship("Comment",backref="post")
 
 class Media(Base):
-    __tablename__ = 'Media'
+    __tablename__ = 'media'
     id = Column(Integer, primary_key=True)
     type = Column(String(250),nullable=False)
     url=Column(String(250),nullable=False)
